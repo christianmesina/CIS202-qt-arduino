@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_led_state[2] = 0;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(readData()));
-    timer->start(100);
+    timer->start(50);
     banimate->move(QPoint(200,200));
-    //setFixedSize(800,600);
+    setFixedSize(800,600);
 }
 
 MainWindow::~MainWindow()
@@ -72,8 +72,11 @@ void MainWindow::readData()
     //const QByteArray data = m_serial->readAll();
     //m_buffer = QString("%1" ).arg( QDateTime::currentDateTime().toTime_t() );
     //processMessage(m_buffer);
-    banimate->addToOrigin(QPoint(1,1));
+    //banimate->addToOrigin(QPoint(1,1));
+
+    banimate->setMove(1,1);
     banimate->repaint();
+
     processMessage(QString("%1 %2").arg(count).arg(QDateTime::currentDateTime().toTime_t() ));
     count++;
     m_buffer = "";
